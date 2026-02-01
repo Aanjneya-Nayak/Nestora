@@ -93,7 +93,7 @@ async function main() {
 }
 
 app.get("/", (req, res) => {
-  res.redirect("/listing");
+  res.redirect("/listings");
 });
 
 //Listings routes

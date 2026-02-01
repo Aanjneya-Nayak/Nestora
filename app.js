@@ -92,6 +92,10 @@ async function main() {
   console.log("Connected to MongoDB");
 }
 
+app.get("/", (req, res) => {
+  res.redirect("/listing");
+});
+
 //Listings routes
 app.use("/listings", listingsrouter);
 

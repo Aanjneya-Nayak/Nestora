@@ -1,0 +1,52 @@
+<% layout('/layouts/boilerplate.ejs') -%>
+
+<div class="container mt-5">
+  <!-- HERO SECTION WITH LOGO -->
+  <div style="
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    border-radius: 12px;
+    border-left: 5px solid #667eea;
+  ">
+    <div>
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+        <img src="/images/logo-nestora.png" alt="Nestora Logo" style="height: 2.5rem; width: auto;">
+        <h1 style="margin: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Discover Your Perfect Stay</h1>
+      </div>
+      <p class="text-muted" style="font-size: 1.1rem; margin: 0;">Explore our collection of unique listings</p>
+    </div>
+    <button type="button" class="btn btn-success btn-lg" onclick="location.href='/listings/new'">
+      <i class="fa-solid fa-plus"></i> Create New Listing
+    </button>
+  </div>
+
+  <div class="row g-4">
+    <% listings.forEach(function(listing) { %>
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100">
+        <div style="position: relative; overflow: hidden;">
+          <img src="<%=listing.image.url%>" class="card-img-top" alt="<%=listing.title%>" style="height: 200px; width: 100%; object-fit: cover;" />
+          <span class="badge bg-danger" style="position: absolute; top: 10px; right: 10px;">₹<%= listing.price %>/night</span>
+        </div>
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><%=listing.title%></h5>
+          <p class="card-text">
+            <%=listing.description.substring(0, 80)%>...
+          </p>
+          <div style="margin-top: auto;">
+            <p style="color: #667eea; font-weight: 600; margin-bottom: 0.5rem;">
+              <i class="fa-solid fa-location-dot"></i> <%= listing.location %>, <%= listing.country %>
+            </p>
+            <a href="/listings/<%= listing._id%>" class="btn btn-primary w-100">
+              <i class="fa-solid fa-arrow-right"></i> View Details
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }); %>
+  </div>

@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container-fluid">
+    <a href="/listings" class="navbar-brand d-flex align-items-center" style="gap: 0.5rem;">
+      <img src="/images/logo-nestora.png" alt="Nestora Logo" style="height: 2.5rem; width: auto;">
+     <span class="brand">
+  <span class="nest">Nest</span><span class="ora">ora</span>
+</span>
+
+    </a>
+    <div class="search navbar-nav mx-auto">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn " type="submit"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings">Home</a>
+        <a class="nav-link" href="/listings">All Listings</a>
+        <a class="nav-link" href="/listings/new">Add Listing</a>
+        
+        <% if(!currentUser) { %>
+        <a class="nav-link ms-2" href="/signup" style="font-weight: 600; color: #ffffff !important;">SignUp</a>
+        <a class="nav-link btn btn-outline-light ms-2" href="/login" style="font-weight: 600;">LogIn</a>
+        <% } else { %>
+        <a class="nav-link ms-3" style="color: #ffffff !important; font-weight: 600;">Welcome, <%= currentUser.username %></a>
+        <a class="nav-link btn ms-2" href="/logout" style="font-weight: 600;">LogOut</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

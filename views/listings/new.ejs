@@ -1,0 +1,155 @@
+<% layout('/layouts/boilerplate.ejs') -%>
+
+<div class="col-12 col-sm-10 col-md-9 col-lg-6 mx-auto mt-5 mb-5">
+  <div class="card shadow-lg border-0">
+    <div class="card-body p-4 p-md-5">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.8rem;
+          margin-bottom: 1.5rem;
+        "
+      >
+        <img
+          src="/images/logo-nestora.png"
+          alt="Nestora Logo"
+          style="height: 1.8rem; width: auto"
+        />
+        <h1
+          class="card-title mb-0"
+          style="
+            background: linear-gradient(135deg, #10b981 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          "
+        >
+          ➕ Create New Listing
+        </h1>
+      </div>
+      <hr class="mb-4" />
+
+      <form
+        method="post"
+        action="/listings"
+        novalidate
+        class="needs-validation"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-4">
+          <label for="title" class="form-label fw-bold">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Add a catchy title"
+            required
+            minlength="3"
+            maxlength="100"
+            class="form-control form-control-lg"
+          />
+          <div class="valid-feedback">✓ Title looks good!</div>
+          <div class="invalid-feedback">
+            Please enter a title (3-100 characters).
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="description" class="form-label fw-bold"
+            >Description</label
+          >
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Describe your listing in detail..."
+            required
+            minlength="10"
+            maxlength="500"
+            class="form-control form-control-lg"
+            rows="4"
+          ></textarea>
+          <small class="text-muted d-block mt-2">10-500 characters</small>
+          <div class="valid-feedback">✓ Description looks good!</div>
+          <div class="invalid-feedback">
+            Please enter a description (10-500 characters).
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="image" class="form-label fw-bold">Image</label>
+          <input
+            id="image"
+            name="image"
+            type="file"
+            class="form-control form-control-lg"
+            required
+          />
+        </div>
+
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <label for="price" class="form-label fw-bold"
+              >Price per Night</label
+            >
+            <div class="input-group input-group-lg">
+              <span class="input-group-text">$</span>
+              <input
+                id="price"
+                type="number"
+                name="price"
+                placeholder="1200"
+                required
+                min="1"
+                max="999999"
+                class="form-control"
+              />
+            </div>
+            <div class="invalid-feedback">Please enter a valid price.</div>
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="country" class="form-label fw-bold">Country</label>
+            <input
+              id="country"
+              type="text"
+              name="country"
+              placeholder="e.g., India, USA, Italy"
+              required
+              minlength="2"
+              class="form-control form-control-lg"
+            />
+            <div class="valid-feedback">✓ Country looks good!</div>
+            <div class="invalid-feedback">
+              Please enter a valid country name.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="location" class="form-label fw-bold">Location</label>
+          <input
+            id="location"
+            type="text"
+            name="location"
+            placeholder="e.g., Udaipur, Rajasthan"
+            required
+            minlength="3"
+            class="form-control form-control-lg"
+          />
+          <div class="valid-feedback">✓ Location looks good!</div>
+          <div class="invalid-feedback">Please enter a valid location.</div>
+        </div>
+
+        <div class="d-grid gap-2 mt-5">
+          <button type="submit" class="btn btn-dark btn-lg fw-bold">
+            ➕ Create Listing
+          </button>
+          <a href="/listings" class="btn btn-outline-secondary btn-lg">
+            Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

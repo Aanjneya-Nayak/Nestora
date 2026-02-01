@@ -51,8 +51,6 @@ const sessionOptions = {
   },
 };
 
-
-
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -93,10 +91,6 @@ async function main() {
   await mongoose.connect(dbUrl);
   console.log("Connected to MongoDB");
 }
-
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
 
 //Listings routes
 app.use("/listings", listingsrouter);

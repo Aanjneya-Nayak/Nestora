@@ -29,7 +29,16 @@ module.exports.isOwner = async (req, res, next) => {
 
 //Validation Middleware
 module.exports.validateListing = (req, res, next) => {
-  const { error } = listingSchema.validate(req.body);
+  // Create a copy of req.body for validation
+  const dataToValidate = { ...req.body };
+  
+  // If there's a file upload, set image to empty string for validation
+  // (the actual file is in req.file and will be handled in the controller)
+  if (req.file) {
+    dataToValidate.image = "";
+  }
+  
+  const { error } = listingSchema.validate(dataToValidate);
   if (error) {
     throw new ExpressError(
       error.details.map((el) => el.message).join(","),

@@ -39,8 +39,12 @@ module.exports.showListing = async (req, res) => {
 // ================= CREATE =================
 module.exports.createListing = async (req, res) => {
   try {
+    console.log("=== CREATE LISTING DEBUG ===");
+    console.log("req.body:", req.body);
+    console.log("req.file:", req.file);
+    console.log("req.user:", req.user);
+    
     const newListing = new Listing(req.body);
-    console.log("Received listing data:", req.body);
     newListing.owner = req.user._id;
 
     // ---------- IMAGE ----------
@@ -69,6 +73,7 @@ module.exports.createListing = async (req, res) => {
     req.flash("success", "Successfully created a new listing!");
     res.redirect(`/listings/${newListing._id}`);
   } catch (error) {
+    console.error("=== CREATE LISTING ERROR ===");
     console.error(error);
     req.flash("error", "Failed to create listing");
     res.redirect("/listings");

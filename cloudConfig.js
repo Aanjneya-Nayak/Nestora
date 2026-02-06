@@ -7,12 +7,19 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 });
 
+console.log("Cloudinary Config Check:");
+console.log("CLOUD_NAME:", process.env.CLOUD_NAME ? "Set" : "MISSING");
+console.log("CLOUD_API_KEY:", process.env.CLOUD_API_KEY ? "Set" : "MISSING");
+console.log("CLOUD_API_SECRET:", process.env.CLOUD_API_SECRET ? "Set" : "MISSING");
+
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'nestora-dev',
-    allowedFormats: ["png", "jpg", "jpeg"], // supports promises as well
-    public_id: (req, file) => 'computed-filename-using-request',
+    allowedFormats: ["png", "jpg", "jpeg"],
+    public_id: (req, file) => {
+      return 'listing-' + Date.now();
+    },
   },
 });
 

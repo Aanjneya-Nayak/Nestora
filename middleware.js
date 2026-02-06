@@ -27,26 +27,44 @@ module.exports.isOwner = async (req, res, next) => {
   next();
 };
 
-//Validation Middleware
+//Validation Middleware for listings (handles multipart form data)
 module.exports.validateListing = (req, res, next) => {
-  // Create a copy of req.body for validation
-  const dataToValidate = { ...req.body };
+  console.log("=== VALIDATION DEBUG ===");
+  console.log("req.body:", req.body);
+  console.log("req.file:", req.file);
   
-  // If there's a file upload, set image to empty string for validation
-  // (the actual file is in req.file and will be handled in the controller)
-  if (req.file) {
-    dataToValidate.image = "";
+  // Manual validation for required fields
+  const { title, description, price, location, country } = req.body;
+  
+  const errors = [];
+  
+  if (!title || title.trim() === '') {
+    errors.push('Title is required');
   }
   
-  const { error } = listingSchema.validate(dataToValidate);
-  if (error) {
-    throw new ExpressError(
-      error.details.map((el) => el.message).join(","),
-      400,
-    );
-  } else {
-    next();
+  if (!description || description.trim() === '') {
+    errors.push('Description is required');
   }
+  
+  if (!price || isNaN(price) || Number(price) < 0) {
+    errors.push('Valid price is required');
+  }
+  
+  if (!location || location.trim() === '') {
+    errors.push('Location is required');
+  }
+  
+  if (!country || country.trim() === '') {
+    errors.push('Country is required');
+  }
+  
+  if (errors.length > 0) {
+    console.log("Validation errors:", errors);
+    throw new ExpressError(errors.join(', '), 400);
+  }
+  
+  console.log("Validation passed");
+  next();
 };
 
 module.exports.validateReview = (req, res, next) => {

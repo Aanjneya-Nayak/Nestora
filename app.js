@@ -27,6 +27,15 @@ const passport = require("passport");
 const localStrategy = require("passport-local");
 const User = require("./models/user.js");
 
+// ================= MIDDLEWARE SETUP (BEFORE ROUTES) =================
+app.engine("ejs", ejsMate);
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(methodOverride("_method"));
+
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
@@ -77,14 +86,6 @@ app.get("/demouser", async (req, res) => {
   res.send(registeredUser);
 });
 
-app.engine("ejs", ejsMate);
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
-app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(methodOverride("_method"));
-
 main().catch((err) => console.log(err));
 
 async function main() {
@@ -116,6 +117,8 @@ app.use((err, req, res, next) => {
   res.status(status).render("error.ejs", { message, status });
 });
 
-app.listen(8084, () => {
-  console.log("Server is running on port 8084");
+const PORT = process.env.PORT || 8084;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

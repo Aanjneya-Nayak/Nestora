@@ -40,6 +40,7 @@ module.exports.showListing = async (req, res) => {
 module.exports.createListing = async (req, res) => {
   try {
     const newListing = new Listing(req.body);
+    console.log("Received listing data:", req.body);
     newListing.owner = req.user._id;
 
     // ---------- IMAGE ----------

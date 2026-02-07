@@ -18,7 +18,8 @@ const storage = new CloudinaryStorage({
     folder: 'nestora-dev',
     allowedFormats: ["png", "jpg", "jpeg"],
     public_id: (req, file) => {
-      return 'listing-' + Date.now();
+      // Generate unique ID using timestamp + random string
+      return 'listing-' + Date.now() + '-' + Math.random().toString(36).substring(2, 9);
     },
   },
 });
